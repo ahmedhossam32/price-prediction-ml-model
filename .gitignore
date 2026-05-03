@@ -1,7 +1,13 @@
+# Virtual environment
 .venv/
+
+# Python cache
 __pycache__/
 *.pyc
 *.pyo
 
-# 61MB and not used by the model
-data/olist_geolocation_dataset.csv
+# Dataset files — download from Kaggle (Olist Brazilian E-Commerce)
+data/
+
+# Backup model — not needed, current best is saved_models/best_model.pkl
+saved_models/best_model_baseline.pkl
