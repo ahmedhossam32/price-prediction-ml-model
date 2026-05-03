@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# 61MB and not used by the model
+data/olist_geolocation_dataset.csv

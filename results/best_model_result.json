@@ -1,0 +1,57 @@
+{
+  "algorithm": "XGBoost_v4",
+  "r2": 0.8332058069377004,
+  "mae": 18.233742732145238,
+  "mape": 16.130191627217105,
+  "features_count": 26,
+  "features_numeric": [
+    "freight_value",
+    "product_photos_qty",
+    "product_weight_g",
+    "product_volume_cm3",
+    "product_description_lenght",
+    "product_name_lenght",
+    "density",
+    "shipping_ratio",
+    "complexity_score",
+    "log_weight",
+    "log_volume",
+    "purchase_month",
+    "is_peak_season",
+    "product_avg_review",
+    "seller_avg_review",
+    "max_installments",
+    "product_sales_count",
+    "seller_sales_count",
+    "seller_product_diversity",
+    "category_avg_price",
+    "seller_avg_price"
+  ],
+  "features_categorical": [
+    "product_category_name_english",
+    "size_category",
+    "payment_type_mode",
+    "customer_state",
+    "seller_state"
+  ],
+  "best_params": {
+    "subsample": 1.0,
+    "n_estimators": 1200,
+    "min_child_weight": 3,
+    "max_depth": 8,
+    "learning_rate": 0.08,
+    "gamma": 0,
+    "colsample_bytree": 0.85
+  },
+  "vs_baseline": {
+    "r2_delta": 0.05010580693770039,
+    "mae_delta": -2.266257267854762
+  },
+  "new_tables_used": [
+    "olist_order_payments_dataset.csv",
+    "olist_order_reviews_dataset.csv",
+    "olist_customers_dataset.csv",
+    "olist_sellers_dataset.csv"
+  ],
+  "leakage_fixed": true
+}
