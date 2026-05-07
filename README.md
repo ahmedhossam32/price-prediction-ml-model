@@ -16,6 +16,8 @@ ML_Price_Prediction_Model/
 ├── main.py                          — FastAPI REST API for predictions
 ├── train.py                         — Main training script (best model)
 ├── train_baseline.py                — Baseline training script (kept for reference)
+├── analyze_categories.py            — Generates per-category stats & SQL seed file
+├── category_stats_seed.sql          — SQL INSERT seed for category_stats table (71 categories)
 │
 ├── data/                            — Raw Olist dataset (9 CSV files)
 │
@@ -180,6 +182,28 @@ python train.py
 ```
 
 Saves the retrained model to `saved_models/best_model.pkl` and results to `results/best_model_result.json`.
+
+---
+
+## Category Statistics (Database Seed)
+
+`analyze_categories.py` reads the raw Olist CSVs and computes per-category aggregate stats used to seed a backend database:
+
+| Column | Description |
+|---|---|
+| `category` | English product category name |
+| `avg_price` | Mean item price across all orders in that category |
+| `avg_review` | Mean review score (order-level, deduplicated) |
+| `median_sales_count` | Median number of times a product in this category was ordered |
+| `most_common_payment_type` | Dominant payment method (`credit_card` across all 71 categories) |
+| `default_max_installments` | Installment ceiling derived from avg price (1 / 3 / 6 / 12) |
+
+Running the script regenerates `category_stats_seed.sql` — a single `INSERT ... ON CONFLICT DO NOTHING` statement covering all 71 categories. Import it into a PostgreSQL database:
+
+```bash
+python analyze_categories.py        # regenerate the SQL
+psql -d your_db -f category_stats_seed.sql
+```
 
 ---
 
